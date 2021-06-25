@@ -2,24 +2,13 @@ import * as THREE from "three";
 
 export default class Light {
   constructor() {
-    // this.spotLight = this._initSpotLight();
     this.ambientLight = this._initAmbientLight();
     this.dirLight = this._initDirLight();
   }
 
   addLights(scene) {
-    // scene.add(this.spotLight);
     scene.add(this.ambientLight);
     scene.add(this.dirLight);
-  }
-
-  _initSpotLight() {
-    const spotLight = new THREE.SpotLight(0xffffff);
-
-    spotLight.position.set(-40, 60, -10);
-    spotLight.castShadow = true;
-
-    return spotLight;
   }
 
   _initAmbientLight() {

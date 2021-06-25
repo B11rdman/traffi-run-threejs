@@ -56,7 +56,6 @@ export class Main {
   _reset() {
     this._playerAngleMoved = 0;
     this._score = 0;
-    //scoreElement ++
 
     this._otherVehicles.forEach((v) => {
       this.scene.remove(v.mesh);
@@ -85,15 +84,11 @@ export class Main {
     }
 
     const timeDelta = timestamp - this._lastTimestamp;
-
     this._movePlayerCar(timeDelta);
 
     const laps = Math.floor(Math.abs(this._playerAngleMoved) / (Math.PI * 2));
 
-    if (laps !== this._score) {
-      this._score = laps;
-    }
-
+    if (laps !== this._score) this._score = laps;
     if (this._otherVehicles.length < (laps + 1) / 5) this._addVehicle();
 
     this._moveOtherVehicles(timeDelta);
@@ -124,9 +119,7 @@ export class Main {
     const type = pickRandom(types);
     const speed = this._getVehicleSpeed(type);
     const clockwise = Math.random() >= 0.5;
-
     const angle = clockwise ? Math.PI / 2 : -Math.PI / 2;
-
     const mesh = type === "car" ? new Car() : new Truck();
 
     const { radius, arcCenterX } = this.map;
@@ -159,43 +152,24 @@ export class Main {
       -15
     );
 
-    //TODO
-    // this._playerCar.hitZone1 = playerHitZone1;
-    // this._playerCar.hitZone2 = playerHitZone2;
-
-    // this._playerCar.showHitZones();
-
     const hit = this._otherVehicles.some((v) => {
       if ((v.type = "car")) {
         const carHitZone1 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, 15);
         const carHitZone2 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, -15);
 
-        //TODO
-        // v.hitZone1 = carHitZone1;
-        // v.hitZone2 = carHitZone2;
         if (this._getDistance(playerHitZone1, carHitZone1) < 40) return true;
         if (this._getDistance(playerHitZone1, carHitZone2) < 40) return true;
         if (this._getDistance(playerHitZone2, carHitZone1) < 40) return true;
-        // v.mesh.showHitZones();
       }
 
       if ((v.type = "truck")) {
         const truckHitZone1 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, 35);
-
         const truckHitZone2 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, 0);
-
-        const truckHitZone3 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, -35);
-        // const truckHitZone1 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, 30);
-        // const truckHitZone2 = this._getHitZonePosition(v.mesh.position, v.angle, v.clockwise, -30);
-        // TODO
-        // v.hitZone1 = truckHitZone1;
-        // v.hitZone2 = truckHitZone2;
 
         if (this._getDistance(playerHitZone1, truckHitZone1) < 40) return true;
         if (this._getDistance(playerHitZone1, truckHitZone2) < 40) return true;
         if (this._getDistance(playerHitZone1, truckHitZone3) < 40) return true;
         if (this._getDistance(playerHitZone2, truckHitZone1) < 40) return true;
-        // v.mesh.showHitZones();
       }
     });
 
@@ -292,11 +266,8 @@ export class Main {
     });
 
     window.addEventListener("resize", () => {
-      // this.renderer.threeRenderer.w
-
       const { cameraWidth } = this.camera.threeCamera;
       const newAspectRatio = this.container.offsetWidth / this.container.offsetHeight;
-      // const newAspectRatio = window.innerWidth / window.innerHeight;
       const adjustedCameraHeight = cameraWidth / newAspectRatio;
 
       this.camera.threeCamera.top = adjustedCameraHeight / 2;
@@ -305,7 +276,6 @@ export class Main {
 
       this.renderer.updateSize();
       this.map.updateSize();
-      // this.renderer.threeRenderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.threeRenderer.render(this.scene, this.camera.threeCamera);
     });
   }

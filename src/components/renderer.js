@@ -21,14 +21,12 @@ export default class Renderer {
     const threeRenderer = new THREE.WebGLRenderer();
 
     threeRenderer.setSize(this._container.offsetWidth, this._container.offsetHeight);
-
     threeRenderer.shadowMap.enabled = true;
 
     return threeRenderer;
   }
 
   updateSize() {
-    // this.threeRenderer.setSize(window.innerWidth, window.innerHeight);
     this.threeRenderer.setSize(this._container.offsetWidth, this._container.offsetHeight);
   }
 }

@@ -48,28 +48,7 @@ export default class Truck extends THREE.Group {
     const color = pickRandom(VehicleColors);
     const material = new THREE.MeshLambertMaterial({ color });
 
-    // this._trailer = new THREE.Mesh(geom, material);
-    // this._trailer = new THREE.Mesh(geom, [
-    //   new THREE.MeshLambertMaterial({ map: texture }),
-    //   new THREE.MeshLambertMaterial({ map: texture }),
-    //   new THREE.MeshLambertMaterial({ map: texture }),
-    //   new THREE.MeshLambertMaterial({ map: texture }),
-    //   material,
-    //   material,
-    // ]);
-
-    const materialArr = [];
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    materialArr.push(new THREE.MeshLambertMaterial({ map: texture }));
-    // materialArr.push(new THREE.MeshLambertMaterial({ color }));
-    // materialArr.push(new THREE.MeshLambertMaterial({ color }));
-
-    this._trailer = new THREE.Mesh(geom, materialArr);
-    // this._trailer = new THREE.MeshFaceMaterial(materialArr);
+    this._trailer = new THREE.Mesh(geom, material);
 
     this._trailer.position.set(-15, 0, 20);
     this._trailer.castShadow = true;
@@ -172,17 +151,5 @@ export default class Truck extends THREE.Group {
     const colorString = color.toString(16);
     const charArr = colorString.split("").slice(0, 6);
     return charArr.join("");
-  }
-
-  //TODO
-  showHitZones() {
-    if (this.hitZone1) {
-      this.zone1 = HitZone();
-      this.add(this.zone1);
-    }
-    if (this.hitZone2) {
-      this.zone2 = HitZone();
-      this.add(this.zone2);
-    }
   }
 }

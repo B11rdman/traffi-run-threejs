@@ -12,7 +12,6 @@ export default class Camera {
 
   _getCamera() {
     const { posX, posY, posZ, width, height, ratio } = CameraConfig;
-    const aspectRatio = ratio;
     const cameraWidth = width;
     const cameraHeight = height;
 

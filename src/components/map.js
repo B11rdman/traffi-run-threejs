@@ -39,10 +39,6 @@ export default class Map {
   }
 
   _initIslands() {
-    // const video = document.getElementById("video");
-    // const texture = new THREE.VideoTexture(video);
-    // console.warn(texture);
-
     const leftIsland = this._getLeftIsland();
     const rightIsland = this._getRightIsland();
     const middleIsland = this._getMiddleIsland();
@@ -54,7 +50,6 @@ export default class Map {
     });
 
     const fieldMesh = new THREE.Mesh(fieldGeometry, [
-      // new THREE.MeshLambertMaterial({ map: texture }),
       new THREE.MeshLambertMaterial({ color: 0x67c240 }),
       new THREE.MeshLambertMaterial({ color: 0x23311c }),
     ]);
@@ -63,8 +58,6 @@ export default class Map {
     fieldMesh.matrixAutoUpdate = false;
 
     scene.add((this.fieldMesh = fieldMesh));
-
-    // video.show();
   }
 
   _setProperties() {

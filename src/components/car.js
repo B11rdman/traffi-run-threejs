@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { HitZone, pickRandom, VehicleColors } from "../config";
+import { pickRandom, VehicleColors } from "../config";
 
 export default class Car extends THREE.Group {
   constructor() {
@@ -107,17 +107,5 @@ export default class Car extends THREE.Group {
     wheel.receiveShadow = false;
 
     return wheel;
-  }
-
-  // TODO
-  showHitZones() {
-    if (this.hitZone1) {
-      this.zone1 = HitZone();
-      this.add(this.zone1);
-    }
-    if (this.hitZone2) {
-      this.zone2 = HitZone();
-      this.add(this.zone2);
-    }
   }
 }
