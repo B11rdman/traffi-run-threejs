@@ -4,8 +4,13 @@ export default class Renderer {
   constructor(scene, container) {
     this._scene = scene;
     this._container = container;
-    this.threeRenderer = this._initRenderer();
+    this.threeRenderer = this._initRenderer({ antialias: true });
     this._container.appendChild(this.threeRenderer.domElement);
+
+    this.updateSize();
+
+    document.addEventListener("DOMContentLoaded", () => this.updateSize(), false);
+    window.addEventListener("resize", () => this.updateSize(), false);
   }
 
   render(scene, camera) {
@@ -15,11 +20,15 @@ export default class Renderer {
   _initRenderer() {
     const threeRenderer = new THREE.WebGLRenderer();
 
-    threeRenderer.setClearColor(0xeeeeee, 1.0);
-    threeRenderer.setSize(innerWidth, innerHeight);
+    threeRenderer.setSize(this._container.offsetWidth, this._container.offsetHeight);
 
     threeRenderer.shadowMap.enabled = true;
 
     return threeRenderer;
+  }
+
+  updateSize() {
+    // this.threeRenderer.setSize(window.innerWidth, window.innerHeight);
+    this.threeRenderer.setSize(this._container.offsetWidth, this._container.offsetHeight);
   }
 }
